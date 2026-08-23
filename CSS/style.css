@@ -1,0 +1,134 @@
+/* Variables Generales */
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Playfair Display", serif;
+    background-color: #2E4540
+}
+
+input {
+    display: none;
+}
+
+input:checked + label {
+    width: 100px;
+    background: red; 
+}
+
+
+/* Body */
+
+#seleccionar-asesino {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.titulo {
+    color: white;
+    font-family: "Oswald", sans-serif;
+}
+
+.subtitulo {
+    color: white;
+
+}
+
+.personajes,
+.btn-ataques {
+    display: flex;
+    gap: 10px;
+}
+
+.tarjeta-seleccionar {
+    width: 200px;
+    height: 100px;
+    border: 1px solid rgb(25, 23, 151);
+    background: #202940;
+    display: flex;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    color: white;
+}
+
+.tarjeta-seleccionar img {
+    width: 70px;
+    display: flex;
+}
+
+#btn-seleccionar {
+    height: 40px;
+    width: 180px;
+    border-radius: 40px;
+    background: transparent;
+    border: 5px black solid;
+    color: white;
+    font-family: "Playfair Display", serif;
+    margin-top: 30px;
+}
+
+#seleccionar-arma {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.boton-ataque {
+    background: rgb(97, 22, 97);
+    color: white;
+    border-radius: 20px;
+    padding: 10px;
+    border-color: transparent;
+    width: 100px;
+    font-family: "Oswald", sans-serif;
+}
+
+#resultado {
+    width: 200px;
+    background: white;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#btn-reiniciar {
+    color: blue;
+    border: none;
+    font-family: "Playfair Display", serif;
+}
+
+.ataques {
+    display: grid;
+    grid-template-columns: 150px 150px;
+    color: white;
+}
+
+.ataques-asesino,
+.ataques-templario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/*  Diseño responsive  */
+
+@media (max-width: 500px) {
+
+    .personajes,
+    .btn-ataques {
+        flex-direction: column;
+    }
+}

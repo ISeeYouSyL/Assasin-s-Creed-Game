@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title> Assasins Creed </title>
+
+    <link rel="stylesheet" href="./CSS/style.css">
+
+</head>
+
+
+<body>
+
+    <section id="seleccionar-asesino">
+
+        <h1 class="titulo"> Assasin´s Creed </h1>
+
+        <h2 class="subtitulo"> Selecciona tu Asesino: </h2>
+
+        <div class="personajes">
+
+            <input type="radio" name="Asesinos" id="altair-ibn-laahad" />
+            <label class="tarjeta-seleccionar" for="altair-ibn-laahad">
+                <p> Altair Ibn-La'Ahad </p>
+                <img src="./assets/Altair" alt="Altair Ibn-La'Ahad">
+            </label>
+
+            <input type="radio" name="Asesinos" id="ezio-auditore" />
+            <label class="tarjeta-seleccionar" for="ezio-auditore">
+                <p> Ezio Auditore </p>
+                <img src="./assets/Ezio" alt="Ezio Auditore">
+            </label>
+
+            <input type="radio" name="Asesinos" id="connor-kenway" />
+            <label class="tarjeta-seleccionar" for="connor-kenway">
+                <p> Connor Kenway </p>
+                <img src="./assets/Connor" alt="Connor Kenway">
+            </label>
+
+
+        </div>
+
+        <button id="btn-seleccionar">
+
+            Seleccionar
+
+        </button>
+
+    </section>
+
+
+    <section id="seleccionar-arma">
+
+        <h1 class="titulo"> Assasins Creed 🗡⚔🏹 </h1>
+
+        <h2 class="subtitulo"> Eligue tu Arma:</h2>
+
+
+        <div class="btn-ataques">
+
+            <button id="btn-hoja" class="boton-ataque">
+
+                Hoja ⚔
+
+            </button>
+
+            <button id="btn-espada" class="boton-ataque">
+
+                Espada 🗡
+
+            </button>
+
+            <button id="btn-arma" class="boton-ataque">
+
+                Arma 🏹
+
+            </button>
+
+        </div>
+
+
+        <div id="resultado">
+
+            <p id="mensajes"> ¡Mucha suerte! </p>
+
+            <section id="reiniciar-juego">
+
+                <button id="btn-reiniciar">
+
+                    Reiniciar Juego
+
+                </button>
+
+            </section>
+
+        </div>
+
+
+        <div class="ataques">
+
+            <div class="ataques-asesino">
+
+                <p id="vidas-asesino"> 3 </p>
+
+                <p id="asesino-jugador"> </p>
+
+                <div id="ataques-del-jugador"> </div>
+
+            </div>
+
+
+            <div class="ataques-templario">
+
+                <p id="vidas-templario"> 3 </p>
+
+                <p id="templario-oponente"> </p>
+
+                <div id="ataques-del-enemigo"> </div>
+
+            </div>
+
+        </div>
+
+    </section>
+ <script src="./JS/js.js"> </script>
+</body>
+
+</html>
