@@ -1,5 +1,4 @@
 // Variables Generales //
-
 let ataqueJugador
 let ataqueEnemigo
 let vidasAsesino = 3
@@ -34,10 +33,6 @@ function iniciarJuego() {
 
     let btnReiniciar = document.getElementById("btn-reiniciar")
     btnReiniciar.addEventListener("click", reiniciarJuego)
-
-
-
-
 }
 
 

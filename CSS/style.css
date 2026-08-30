@@ -15,9 +15,9 @@ input {
     display: none;
 }
 
-input:checked + label {
+input:checked+label {
     width: 100px;
-    background: red; 
+    background: red;
 }
 
 
@@ -92,6 +92,8 @@ input:checked + label {
     font-family: "Oswald", sans-serif;
 }
 
+
+
 #resultado {
     width: 200px;
     background: white;
@@ -122,6 +124,23 @@ input:checked + label {
     align-items: center;
 }
 
+#ver-mapa {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#ver-mapa button {
+    height: 40px;
+    width: 80px;
+    border-radius: 40px;
+    background: transparent;
+    border: 5px black solid;
+    color: white;
+    font-family: "Playfair Display", serif;
+    margin: 10px 0px;
+}
+
 
 /*  Diseño responsive  */
 
@@ -131,4 +150,13 @@ input:checked + label {
     .btn-ataques {
         flex-direction: column;
     }
+    
+#ver-mapa div{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
+
+
+}
+

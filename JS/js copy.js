@@ -2,17 +2,18 @@
 
 const sectionSeleccionarArma = document.getElementById("seleccionar-arma")
 const sectionReiniciarJuego = document.getElementById("reiniciar-juego")
-const sectionSeleccionarAsesino = document.getElementById("seleccionar-asesino")
-const sectionResultado = document.getElementById("mensajes")
-
 const btnAsesinoJugador = document.getElementById("btn-seleccionar");
 const btnReiniciar = document.getElementById("btn-reiniciar")
+
+const sectionSeleccionarAsesino = document.getElementById("seleccionar-asesino")
 
 const spanAsesinoJugador = document.getElementById("asesino-jugador");
 const spanTemplarioOponente = document.getElementById("templario-oponente");
 
 const spanVidasAsesino = document.getElementById("vidas-asesino")
 const spanVidasTemplario = document.getElementById("vidas-templario")
+
+const sectionResultado = document.getElementById("mensajes")
 
 const ataquesDelJugador = document.getElementById("ataques-del-jugador")
 const ataquesDelEnemigo = document.getElementById("ataques-del-enemigo")
@@ -27,83 +28,49 @@ let assasins = []
 let templarios = []
 let ataqueJugador = []
 let ataqueEnemigo = []
-
 let opcionDeAsesinos
-
 let inputEzio
 let inputAltair
 let inputConnor
-
 let asesinoJugador
 let AsesinoJugadorObjeto
-
 let ataquesAsesino
 let AtaquesTemplario
-
 let btnHoja
 let btnEspada
 let btnArma
 let botones = []
-
 let indexAtaqueJugador
 let indexAtaqueEnemigo
-
 let victoriasJugador = 0
 let victoriasEnemigo = 0
-
 let lienzo = mapa.getContext("2d")
 let intervalo
 let mapaBackground = new Image()
 mapaBackground.src = "./assets/Mapa.jpg"
 
-// Ajustar mapa a cualquier dispositivo // 
-
-let alturaMapa
-let anchoMapa = window.innerWidth - 20 
-const anchoMaxMapa = 350 
-
-if(anchoMapa > anchoMaxMapa) {
-    anchoMapa = anchoMaxMapa - 20
-}
-
-alturaMapa = anchoMapa * 600 / 800
-mapa.width = anchoMapa
-mapa.height = alturaMapa
-
-
-
-
 // Creacion de asesinos //
 
 class Assasin {
-    constructor(nombre, foto, vida, fotoMapa) {
+    constructor(nombre, foto, vida) {
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
         this.ataques = []
+        this.x = 20
+        this.y = 30
         this.ancho = 80
         this.alto = 80
-        this.x = aleatorio(0, mapa.width - this.ancho)
-        this.y = aleatorio(0, mapa.height - this.alto)
         this.mapaFoto = new Image()
-        this.mapaFoto.src = fotoMapa
+        this.mapaFoto.src = foto
         this.velocidadX = 0
         this.velocidadY = 0
     }
-    pintarAsesino() {
-        lienzo.drawImage(
-            this.mapaFoto,
-            this.x,
-            this.y,
-            this.ancho,
-            this.alto
-        )
-    }
 }
 
-let altair = new Assasin("Altair", "./assets/Altair", 5, "./assets/Altair")
-let ezio = new Assasin("Ezio", "./assets/Ezio", 5, "./assets/Ezio")
-let connor = new Assasin("Connor", "./assets/Connor", 5, "./assets/Connor")
+let altair = new Assasin("Altair", "./assets/Altair", 5)
+let ezio = new Assasin("Ezio", "./assets/Ezio", 5)
+let connor = new Assasin("Connor", "./assets/Connor", 5)
 
 
 // Creacion de Templarios // 
@@ -119,10 +86,6 @@ class Templario {
 let rodrigo = new Templario("Rodrigo Borgia", 5)
 let cesare = new Templario("Cesare Borgia", 5)
 let haytham = new Templario("Haytham Kenway", 5)
-
-let rodrigoT = new Assasin("Rodrigo", "./assets/Altair", 5, "./assets/Rodrigo")
-let cesareT = new Assasin("Cesare", "./assets/Ezio", 5, "./assets/Cesare")
-let haythamT = new Assasin("Haytham", "./assets/Connor", 5, "./assets/Haytham")
 
 templarios.push(rodrigo, cesare, haytham)
 
@@ -158,7 +121,7 @@ assasins.push(altair, ezio, connor)
 
 // Creacion de ataques enemigo //
 
-rodrigoT.ataques.push(
+rodrigo.ataques.push(
     { nombre: "⚔", id: "btn-hoja" },
     { nombre: "⚔", id: "btn-hoja" },
     { nombre: "⚔", id: "btn-hoja" },
@@ -166,7 +129,7 @@ rodrigoT.ataques.push(
     { nombre: "🏹 ", id: "btn-arma" },
 )
 
-cesareT.ataques.push(
+cesare.ataques.push(
     { nombre: "🗡", id: "btn-espada" },
     { nombre: "🗡", id: "btn-espada" },
     { nombre: "🗡", id: "btn-espada" },
@@ -174,7 +137,7 @@ cesareT.ataques.push(
     { nombre: "🏹", id: "btn-arma" },
 )
 
-haythamT.ataques.push(
+haytham.ataques.push(
     { nombre: "🏹", id: "btn-arma" },
     { nombre: "🏹", id: "btn-arma" },
     { nombre: "🏹", id: "btn-arma" },
@@ -226,6 +189,9 @@ function seleccionarAsesinoJugador() {
 
     sectionSeleccionarAsesino.style.display = "none" // Ocultar boton de seleccionar // 
 
+    
+
+
     if (inputEzio.checked) {
         spanAsesinoJugador.innerHTML = inputEzio.id
         asesinoJugador = inputEzio.id
@@ -244,6 +210,7 @@ function seleccionarAsesinoJugador() {
 
     if (jugar == 1) {
         extraerAtaques(asesinoJugador)
+        seleccionarTemplarioOponente();
     }
     sectionVerMapa.style.display = "flex"
     iniciarMapa()
@@ -315,9 +282,12 @@ function secuenciaAtaque() {
 
 // Seleccion templario aleatoria del oponente //
 
-function seleccionarTemplarioOponente(enemigo) {
-    spanTemplarioOponente.innerHTML = enemigo.nombre        
-    AtaquesTemplario = enemigo.ataques
+function seleccionarTemplarioOponente() {
+    let templarioAleatorio = aleatorio(0, templarios.length - 1);
+
+    spanTemplarioOponente.innerHTML = templarios[templarioAleatorio].nombre
+    AtaquesTemplario = templarios[templarioAleatorio].ataques
+
     secuenciaAtaque()
 }
 
@@ -437,11 +407,11 @@ function aleatorio(min, max) {
 }
 
 
-// Pintar personaje y enemigos //
+// Pintar personaje //
 
 function pintarCanvas() {
-    AsesinoJugadorObjeto.x = AsesinoJugadorObjeto.x + AsesinoJugadorObjeto.velocidadX
-    AsesinoJugadorObjeto.y = AsesinoJugadorObjeto.y + AsesinoJugadorObjeto.velocidadY
+   AsesinoJugadorObjeto.x = AsesinoJugadorObjeto.x + AsesinoJugadorObjeto.velocidadX
+   AsesinoJugadorObjeto.y = AsesinoJugadorObjeto.y + AsesinoJugadorObjeto.velocidadY
     lienzo.clearRect(0, 0, mapa.width, mapa.height)
     lienzo.drawImage(
         mapaBackground,
@@ -450,38 +420,36 @@ function pintarCanvas() {
         mapa.width,
         mapa.height
     )
-    AsesinoJugadorObjeto.pintarAsesino()
-    rodrigoT.pintarAsesino()
-    cesareT.pintarAsesino()
-    haythamT.pintarAsesino()
-    if (AsesinoJugadorObjeto.velocidadX !== 0 || AsesinoJugadorObjeto.velocidadY !== 0) {
-        revisarColision(rodrigoT)
-        revisarColision(cesareT)
-        revisarColision(haythamT)
-    }
+    lienzo.drawImage(
+        AsesinoJugadorObjeto.mapaFoto,
+        AsesinoJugadorObjeto.x,
+        AsesinoJugadorObjeto.y,
+        AsesinoJugadorObjeto.ancho,
+        AsesinoJugadorObjeto.alto
+    )
 }
 
 // Mover personaje // 
 
 function moverArriba() {
-    AsesinoJugadorObjeto.velocidadY = -5
+   AsesinoJugadorObjeto.velocidadY = -5
 }
 
 function moverAbajo() {
-    AsesinoJugadorObjeto.velocidadY = 5
+   AsesinoJugadorObjeto.velocidadY = 5
 }
 
 function moverDerecha() {
-    AsesinoJugadorObjeto.velocidadX = 5
+   AsesinoJugadorObjeto.velocidadX = 5
 }
 
 function moverIzquierda() {
-    AsesinoJugadorObjeto.velocidadX = -5
+   AsesinoJugadorObjeto.velocidadX = -5
 }
 
 function detenerMovimiento() {
-    AsesinoJugadorObjeto.velocidadX = 0
-    AsesinoJugadorObjeto.velocidadY = 0
+   AsesinoJugadorObjeto.velocidadX = 0
+   AsesinoJugadorObjeto.velocidadY = 0
 }
 
 function presionarTecla(event) {
@@ -506,9 +474,11 @@ function presionarTecla(event) {
 
 function iniciarMapa() {
 
-    AsesinoJugadorObjeto = obtenerObjetoAsesino(asesinoJugador)
+    mapa.width = 320
+    mapa.height = 240
+    AsesinoJugadorObjeto = obtenerObjetoMascota(asesinoJugador)
 
-    intervalo = setInterval(pintarCanvas, 50)
+    invertalo = setInterval(pintarCanvas, 50)
 
     window.addEventListener("keydown", presionarTecla)
     window.addEventListener("keyup", detenerMovimiento)
@@ -516,7 +486,7 @@ function iniciarMapa() {
 
 // Mostrar personaje seleccionado //
 
-function obtenerObjetoAsesino() {
+function obtenerObjetoMascota() {
     for (let i = 0; i < assasins.length; i++) {
         if (asesinoJugador === assasins[i].nombre) {
             return assasins[i]
@@ -524,43 +494,6 @@ function obtenerObjetoAsesino() {
     }
 
 }
-
-
-// Colision de personajes //
-
-
-function revisarColision(enemigo) {
-
-    const arribaAsesino = AsesinoJugadorObjeto.y + 25
-    const abajoAsesino = AsesinoJugadorObjeto.y + AsesinoJugadorObjeto.alto - 25
-    const derechaAsesino = AsesinoJugadorObjeto.x + AsesinoJugadorObjeto.ancho - 25
-    const izquierdaAsesino = AsesinoJugadorObjeto.x + 25
-
-    const arribaTemplario = enemigo.y
-    const abajoTemplario = enemigo.y + enemigo.alto
-    const derechaTemplario = enemigo.x + enemigo.ancho
-    const izquierdaTemplario = enemigo.x
-
-
-    if (
-        abajoAsesino < arribaTemplario ||
-        arribaAsesino > abajoTemplario ||
-        derechaAsesino < izquierdaTemplario ||
-        izquierdaAsesino > derechaTemplario
-    ) {
-        return;
-    }
-    detenerMovimiento()
-
-    // Comenzar fase de ataque y ocultar mapa // 
-    clearInterval(intervalo)
-    sectionSeleccionarArma.style.display = "flex"
-    sectionVerMapa.style.display = "none"
-    seleccionarTemplarioOponente(enemigo)
-    // alert("Enemigo nuevo" + enemigo.nombre)
-}
-
-
 
 // Iniciar juego //
 

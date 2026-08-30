@@ -17,43 +17,50 @@
 
 <body>
 
+    <!-- Seleccionar personaje -->
+
     <section id="seleccionar-asesino">
 
         <h1 class="titulo"> Assasin´s Creed </h1>
 
         <h2 class="subtitulo"> Selecciona tu Asesino: </h2>
 
-        <div class="personajes">
+        <div id="contenedor-personajes" class="personajes"> </div>
 
-            <input type="radio" name="Asesinos" id="altair-ibn-laahad" />
-            <label class="tarjeta-seleccionar" for="altair-ibn-laahad">
-                <p> Altair Ibn-La'Ahad </p>
-                <img src="./assets/Altair" alt="Altair Ibn-La'Ahad">
-            </label>
+        <div id="contenedor-templarios" class="templarios">
 
-            <input type="radio" name="Asesinos" id="ezio-auditore" />
-            <label class="tarjeta-seleccionar" for="ezio-auditore">
-                <p> Ezio Auditore </p>
-                <img src="./assets/Ezio" alt="Ezio Auditore">
-            </label>
+            <button id="btn-seleccionar">
 
-            <input type="radio" name="Asesinos" id="connor-kenway" />
-            <label class="tarjeta-seleccionar" for="connor-kenway">
-                <p> Connor Kenway </p>
-                <img src="./assets/Connor" alt="Connor Kenway">
-            </label>
+                Seleccionar
 
-
-        </div>
-
-        <button id="btn-seleccionar">
-
-            Seleccionar
-
-        </button>
+            </button>
 
     </section>
 
+
+    <!-- Insertar mapa -->
+
+    <section id="ver-mapa">
+
+        <h2 class="subtitulo"> Recorre el mapa con tu Asesino </h2>
+
+        <canvas id="mapa"></canvas>
+
+        <button onmouseup="detenerMovimiento()" onmousedown="moverArriba()"> Arriba </button>
+
+        <div>
+
+            <button onmouseup="detenerMovimiento()" onmousedown="moverIzquierda ()"> Izquierda </button>
+
+            <button onmouseup="detenerMovimiento()" onmousedown="moverAbajo()"> Abajo </button>
+            <button onmouseup="detenerMovimiento()" onmousedown="moverDerecha ()"> Derecha </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- Seleccionar ataques -->
 
     <section id="seleccionar-arma">
 
@@ -62,28 +69,12 @@
         <h2 class="subtitulo"> Eligue tu Arma:</h2>
 
 
-        <div class="btn-ataques">
-
-            <button id="btn-hoja" class="boton-ataque">
-
-                Hoja ⚔
-
-            </button>
-
-            <button id="btn-espada" class="boton-ataque">
-
-                Espada 🗡
-
-            </button>
-
-            <button id="btn-arma" class="boton-ataque">
-
-                Arma 🏹
-
-            </button>
+        <div id="contenedor-ataques" class="btn-ataques">
 
         </div>
 
+
+        <!-- Mostrar resultado -->
 
         <div id="resultado">
 
@@ -102,11 +93,13 @@
         </div>
 
 
+        <!-- Seccion de combate -->
+
         <div class="ataques">
 
             <div class="ataques-asesino">
 
-                <p id="vidas-asesino"> 3 </p>
+                <p id="vidas-asesino"> 0 </p>
 
                 <p id="asesino-jugador"> </p>
 
@@ -117,7 +110,7 @@
 
             <div class="ataques-templario">
 
-                <p id="vidas-templario"> 3 </p>
+                <p id="vidas-templario"> 0 </p>
 
                 <p id="templario-oponente"> </p>
 
@@ -128,7 +121,9 @@
         </div>
 
     </section>
- <script src="./JS/js.js"> </script>
+
+    <script src="./JS/js.js"> </script>
+
 </body>
 
 </html>
